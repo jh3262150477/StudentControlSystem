@@ -1,15 +1,15 @@
-#include "Widget.h"
+#include "Page.h"
 #include <iostream>
 
 using namespace std;
 
-void Widget::addPage(IMAGE* n)
+void Page::addPage(IMAGE* n)
 {
 	pages.push_back(n);
 	elements.push_back({});
 }
 
-void Widget::addElement(int pageIndex, Element* e)
+void Page::addElement(int pageIndex, Element* e)
 {
 	if (pageIndex >= 0 && pageIndex < pages.size())
 	{
@@ -17,7 +17,7 @@ void Widget::addElement(int pageIndex, Element* e)
 	}
 }
 
-void Widget::setCurrentIndex(int index)
+void Page::setCurrentIndex(int index)
 {
     if (index >= 0 && index < pages.size())
     {
@@ -25,12 +25,12 @@ void Widget::setCurrentIndex(int index)
     }
 }
 
-vector<Element*> Widget::getElements(int pageIndex)
+vector<Element*> Page::getElements(int pageIndex)
 {
 	return elements[pageIndex];
 }
 
-void Widget::mouseMove(int mouseX, int mouseY)
+void Page::mouseMove(int mouseX, int mouseY)
 {
 	if (currentIndex >= 0 && currentIndex < pages.size())
 	{
@@ -40,7 +40,7 @@ void Widget::mouseMove(int mouseX, int mouseY)
 	}
 }
 
-void Widget::mouseClick(int mouseX, int mouseY)
+void Page::mouseClick(int mouseX, int mouseY)
 {
 	if (currentIndex >= 0 && currentIndex < pages.size())
 	{
@@ -53,7 +53,7 @@ void Widget::mouseClick(int mouseX, int mouseY)
 	}
 }
 
-void Widget::draw()
+void Page::draw()
 {
 	if (currentIndex >= 0 && currentIndex < pages.size())
 	{
@@ -64,7 +64,7 @@ void Widget::draw()
 	}
 }
 
-void Widget::keyInput(wchar_t ch)
+void Page::keyInput(wchar_t ch)
 {
 	if (currentIndex >= 0 && static_cast<size_t>(currentIndex) < elements.size()) {
 		for (Element* element : elements[currentIndex]) {
@@ -74,7 +74,7 @@ void Widget::keyInput(wchar_t ch)
 	}
 }
 
-void Widget::updateCursors() {
+void Page::updateCursors() {
 	if (currentIndex >= 0 && static_cast<size_t>(currentIndex) < elements.size()) {
 		for (Element* element : elements[currentIndex]) {
 			element->updateCursor(); // 更新所有元素的光标状态
@@ -82,7 +82,7 @@ void Widget::updateCursors() {
 	}
 }
 
-void Widget::mouseWheel(int mouseX, int mouseY, int wheel)
+void Page::mouseWheel(int mouseX, int mouseY, int wheel)
 {
 	if (currentIndex >= 0 && currentIndex < pages.size())
 	{
@@ -93,15 +93,15 @@ void Widget::mouseWheel(int mouseX, int mouseY, int wheel)
 	}
 }
 
-Widget::Widget(int width, int height) :
+Page::Page(int width, int height) :
 	width(width), height(height), currentIndex(-1){}
 
-void Widget::init()
+void Page::init()
 {
 	initgraph(width, height, NULL);
 }
 
-void Widget::run()
+void Page::run()
 {
 	ExMessage msg;
 
@@ -137,18 +137,18 @@ void Widget::run()
 	EndBatchDraw();
 }
 
-void Widget::close()
+void Page::close()
 {
 	closegraph();
 	exit(0);
 }
 
-int Widget::getCurrentIndex()
+int Page::getCurrentIndex()
 {
 	return currentIndex;
 }
 
-int Widget::createPage(COLORREF color)
+int Page::createPage(COLORREF color)
 {
 	IMAGE* img = new IMAGE(width, height);
 	setfillcolor(color);
@@ -158,34 +158,34 @@ int Widget::createPage(COLORREF color)
 	return 0;
 }
 
-Text* Widget::addTextElement(int pageIndex, int x, int y, int weight, const wchar_t* ifFaceName, COLORREF textColor, const wchar_t* text)
+Text* Page::addTextElement(int pageIndex, int x, int y, int weight, const wchar_t* ifFaceName, COLORREF textColor, const wchar_t* text)
 {
 	Text* t = new Text(x, y, weight, ifFaceName, textColor, text);
 	addElement(pageIndex, t);
 	return t;
 }
 
-void Widget::addImageElement(int pageIndex, int x, int y, IMAGE* image)
+void Page::addImageElement(int pageIndex, int x, int y, IMAGE* image)
 {
 	Image* i = new Image(x, y, image);
 	addElement(pageIndex, i);
 }
 
-Button* Widget::addButton(int pageIndex, int x, int y, int width, int height, const std::wstring& text, const std::function<void()>& onClick)
+Button* Page::addButton(int pageIndex, int x, int y, int width, int height, const std::wstring& text, const std::function<void()>& onClick)
 {
 	Button* b = new Button(x, y, width, height, text, onClick);
 	addElement(pageIndex, b);
 	return b;
 }
 
-TextBox* Widget::addTextBox(int pageIndex, int x, int y, int width, int height, int maxWord)
+TextBox* Page::addTextBox(int pageIndex, int x, int y, int width, int height, int maxWord)
 {
 	TextBox* t = new TextBox(x, y, width, height, maxWord);
 	addElement(pageIndex, t);
     return t;
 }
 
-TableWidget* Widget::addTable(int pageIndex, int x, int y, int width, int height, const std::function<void()>& onContinue) {
+TableWidget* Page::addTable(int pageIndex, int x, int y, int width, int height, const std::function<void()>& onContinue) {
 	TableWidget* table = new TableWidget(x, y, width, height, 10, onContinue);
 	addElement(pageIndex, table);
 	return table;

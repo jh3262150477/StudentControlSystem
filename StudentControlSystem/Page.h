@@ -4,7 +4,7 @@
 #include <vector>
 #include "Element.h"
 
-class Widget
+class Page
 {
 private:
 	int width;
@@ -23,7 +23,7 @@ private:
 	void mouseWheel(int mouseX, int mouseY, int wheel);
 
 public:
-	Widget(int width, int height);
+	Page(int width, int height);
 
 	void init(); //初始化图形界面
 	void run(); //进入消息循环队列

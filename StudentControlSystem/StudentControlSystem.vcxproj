@@ -130,12 +130,12 @@
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="StudentControlSystem.cpp" />
     <ClCompile Include="StudentList.cpp" />
-    <ClCompile Include="Widget.cpp" />
+    <ClCompile Include="Page.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Element.h" />
     <ClInclude Include="StudentList.h" />
-    <ClInclude Include="Widget.h" />
+    <ClInclude Include="Page.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\star.png" />

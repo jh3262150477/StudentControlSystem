@@ -27,7 +27,7 @@
     <ClCompile Include="Element.cpp">
       <Filter>源文件\widget</Filter>
     </ClCompile>
-    <ClCompile Include="Widget.cpp">
+    <ClCompile Include="Page.cpp">
       <Filter>源文件\widget</Filter>
     </ClCompile>
     <ClCompile Include="StudentList.cpp">
@@ -38,7 +38,7 @@
     <ClInclude Include="Element.h">
       <Filter>头文件\widget</Filter>
     </ClInclude>
-    <ClInclude Include="Widget.h">
+    <ClInclude Include="Page.h">
       <Filter>头文件\widget</Filter>
     </ClInclude>
     <ClInclude Include="StudentList.h">
